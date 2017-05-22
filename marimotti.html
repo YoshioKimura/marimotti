@@ -1,0 +1,47 @@
+<html>
+
+<head>
+    <title></title>
+    <script>
+        // 画像に反射運動をさせる
+        itv = 1; // 画像が動く間隔(ミリ秒単位)
+        dx = 8; // １回で画像が動くx座標の距離
+        dy = 8; // １回で画像が動くy座標の距離
+        imgX = 0;
+        imgY = 0;
+
+        function moveImg() {
+            imgX += dx;
+            imgY += dy;
+            document.img.style.left = imgX;
+            document.img.style.top = imgY;
+            if ((imgX < 1) || (imgX > winW)) dx = -dx;
+            if ((imgY < 1) || (imgY > winH)) dy = -dy;
+        }
+
+        function set() {
+            if (document.all) {
+                winW = document.body.clientWidth;
+                winH = document.body.clientHeight;
+            }
+            if (!document.all && document.getElementById) {
+                winW = window.innerWidth;
+                winH = window.innerHeight;
+            }
+            winW = winW - document.img.width;
+            winH = winH - document.img.height;
+            timerID = setInterval("moveImg()", itv);
+        }
+
+        function imgClick() {
+            alert("つかまえた！");
+        }
+    </script>
+</head>
+
+<body bgcolor="#ffffff" onLoad="set()">
+<a href="#" onclick="imgClick();"><img src="img/marimo.png" name="img" style="position:absolute"></a>
+
+</body>
+
+</html>
